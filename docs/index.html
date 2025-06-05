@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathFinder</title>
+    <!-- 引入MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .equation {
+            margin: 10px 0;
+        }
+        .figure {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .figure img {
+            max-width: 100%;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>PathFinder</h1>
+    <p>Wellcome to our project of <em>PathFinder: Advancing Path Loss Prediction for Out-of-Distribution Multi-Transmitter Environments</em>.</p>
+
+    <div class="section">
+        <h2>Experiment</h2>
+        <h3>Evaluation Metric</h3>
+        <p>To evaluate the performance of different methods, we construct a total of six core metrics. The first three metrics are global coverage metrics, namely MSE, RMSE, and NMSE. The latter three metrics focus on the receiver area and are referred to as MSE-R, RMSE-R, and NMSE-R.</p>
+
+        <h4>Global Coverage Metrics</h4>
+        <ol>
+            <li><strong>Mean Squared Error (MSE)</strong> serves as a fundamental accuracy metric, directly reflecting the model's prediction error across the entire area. The calculation formula is given by:
+                <div class="equation">
+                    \[
+                    \text{MSE} = \frac{1}{HW} \sum_{i=1}^{HW} (\mathbf{Y}_i - \hat{\mathbf{Y}}_i)^2
+                    \]
+                </div>
+                where \(\mathbf{Y}_i\) and \(\hat{\mathbf{Y}}_i\) represent the true value and predicted value of the \(i\)-th pixel, respectively, and \(HW\) is the total number of pixels in the entire area. This metric amplifies the influence of outliers by taking the arithmetic mean of the squared errors, measuring the overall fitting error of the model across the entire study area.
+            </li>
+            <li><strong>Root Mean Squared Error (RMSE)</strong> normalizes the dimensions based on MSE, expressed as:
+                <div class="equation">
+                    \[
+                    \text{RMSE} = \sqrt{\frac{1}{HW} \sum_{i=1}^{HW} (\mathbf{Y}_i - \hat{\mathbf{Y}}_i)^2}
+                    \]
+                </div>
+                This metric shares the same dimension as the true values, providing an intuitive reflection of the average deviation between the predicted and true values, making it more interpretable than MSE.
+            </li>
+            <li><strong>Normalized Mean Squared Error (NMSE)</strong> eliminates the dimensional influence through relative error representation, defined as:
+                <div class="equation">
+                    \[
+                    \text{NMSE} = \frac{\sum_{i=1}^{HW} (\mathbf{Y}_i - \hat{\mathbf{Y}}_i)^2}{\sum_{i=1}^{HW} \mathbf{Y}_i^2}
+                    \]
+                </div>
+                This metric transforms absolute errors into relative errors, making it more suitable for assessing scenarios with significant differences in path loss.
+            </li>
+        </ol>
+
+        <h4>Receiver Area-based Metrics</h4>
+        <p>The last three metrics focus on the receiver area \(\mathcal{M}' \in \{0,1\}^{HW \times 1}\) (where \(\mathcal{M}'_i=1\) indicates the \(i\)-th pixel belongs to the receiver area), enabling targeted evaluation of the specified region through a mask matrix. The specific forms correspond to the basic metrics but introduce area weights.</p>
+        <ol>
+            <li><strong>Mean Squared Error for Receiver (MSE-R)</strong>:
+                <div class="equation">
+                    \[
+                    \text{MSE-R} = \frac{1}{|\mathcal{M}'|} \sum_{i=1}^{HW} \mathcal{M}'_i \cdot (\mathbf{Y}_i - \hat{\mathbf{Y}}_i)^2
+                    \]
+                </div>
+                where \(|\mathcal{M}'|\) denotes the total number of valid pixels in the receiver area (i.e., the number of pixels where \(\mathcal{M}'_i=1\)). This metric focuses on fitting errors in the receiver area through masked weighted averages, amplifying the influence of outliers in the target region.
+            </li>
+            <li><strong>Root Mean Squared Error for Receiver (RMSE-R)</strong>:
+                <div class="equation">
+                    \[
+                    \text{RMSE-R} = \sqrt{\frac{1}{|\mathcal{M}'|} \sum_{i=1}^{HW} \mathcal{M}'_i \cdot (\mathbf{Y}_i - \hat{\mathbf{Y}}_i)^2} = \sqrt{\text{MSE-R}}
+                    \]
+                </div>
+                This metric normalizes dimensions based on MSE-R, aligning with the dimensions of the true values to intuitively reflect the average deviation between the predicted values and true values in the receiver area.
+            </li>
+            <li><strong>Normalized Mean Squared Error for Receiver (NMSE-R)</strong>:
+                <div class="equation">
+                    \[
+                    \text{NMSE-R} = \frac{\sum_{i=1}^{HW} \mathcal{M}'_i \cdot (\mathbf{Y}_i - \hat{\mathbf{Y}}_i)^2}{\sum_{i=1}^{HW} \mathcal{M}'_i \cdot \mathbf{Y}_i^2}
+                    \]
+                </div>
+                This metric calculates relative errors in the receiver area, eliminating dimensional influences and normalizing regional differences, making it suitable for comparing model performance across different receiver scenarios.
+            </li>
+        </ol>
+        <p>In summary, the first category of global coverage metrics not only requires the model to focus on RPP estimation but also evaluates the model's overall fitting capability. In contrast, the second category of receiver area extended metrics solely considers the model's RPP ability, making it more task-specific.</p>
+    </div>
+
+    <div class="section">
+        <h2>Comparison on OOD-RPP</h2>
+        <p>Fig. 1 displays the prediction results of all baseline methods alongside our model across different samples.</p>
+        <div class="figure">
+            <img src="pics/main_trial1.jpg" alt="Visualization examples of different models in the OOD-RPP task">
+            <p>Visualization examples of different models in the OOD-RPP task.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Coverage Analysis</h2>
+        <p>Figs. 2, 3, 4, 5, and 6 visualize the results of different models when the importance of the coverage area is 40%, 30%, 20%, 10%, and 5%, respectively.</p>
+        <div class="figure">
+            <img src="pics/main_trial5_60.jpg" alt="Visualization cases of different models when dealing with the most important 40% of the coverage area">
+            <p>Visualization cases of different models when dealing with the most important 40% of the coverage area.</p>
+        </div>
+        <div class="figure">
+            <img src="pics/main_trial5_70.jpg" alt="Visualization cases of different models when dealing with the most important 30% of the coverage area">
+            <p>Visualization cases of different models when dealing with the most important 30% of the coverage area.</p>
+        </div>
+        <div class="figure">
+            <img src="pics/main_trial5_80.jpg" alt="Visualization cases of different models when dealing with the most important 20% of the coverage area">
+            <p>Visualization cases of different models when dealing with the most important 20% of the coverage area.</p>
+        </div>
+        <div class="figure">
+            <img src="pics/main_trial5_90.jpg" alt="Visualization cases of different models when dealing with the most important 10% of the coverage area">
+            <p>Visualization cases of different models when dealing with the most important 10% of the coverage area.</p>
+        </div>
+        <div class="figure">
+            <img src="pics/main_trial5_95.jpg" alt="Visualization cases of different models when dealing with the most important 5% of the coverage area">
+            <p>Visualization cases of different models when dealing with the most important 5% of the coverage area.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Comparison of OOD Performance</h2>
+        <p>Table 1 shows the comparison of OOD performance of different models when facing varying numbers of transmitters.</p>
+        <table class="table">
+            <caption>Comparison of OOD performance of different models when facing varying numbers of transmitters.</caption>
+            <thead>
+                <tr>
+                    <th>Tx-num/Model</th>
+                    <th>Metric</th>
+                    <th>AE</th>
+                    <th>RadioUNet</th>
+                    <th>PMNet</th>
+                    <th>REM-Net</th>
+                    <th>Ours</th>
+                    <th>Improvement</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">2</td>
+                    <td>MSE</td>
+                    <td>0.008311</td>
+                    <td>0.009541</td>
+                    <td>0.008171</td>
+                    <td>0.008204</td>
+                    <td><strong>0.00095</strong></td>
+                    <td>88.43%</td>
+                </tr>
+                <tr>
+                    <td>RMSE</td>
+                    <td>0.091157</td>
+                    <td>0.097661</td>
+                    <td>0.090341</td>
+                    <td>0.090515</td>
+                    <td><strong>0.03075</strong></td>
+                    <td>65.97%</td>
+                </tr>
+                <tr>
+                    <td>NMSE</td>
+                    <td>0.133632</td>
+                    <td>0.15345</td>
+                    <td>0.131345</td>
+                    <td>0.131917</td>
+                    <td><strong>0.0152</strong></td>
+                    <td>88.43%</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">3</td>
+                    <td>MSE</td>
+                    <td>0.01307</td>
+                    <td>0.025124</td>
+                    <td>0.008654</td>
+                    <td>0.006909</td>
+                    <td><strong>0.000825</strong></td>
+                    <td>88.05%</td>
+                </tr>
+                <tr>
+                    <td>RMSE</td>
+                    <td>0.114313</td>
+                    <td>0.158482</td>
+                    <td>0.092957</td>
+                    <td>0.083091</td>
+                    <td><strong>0.028727</strong></td>
+                    <td>65.43%</td>
+                </tr>
+                <tr>
+                    <td>NMSE</td>
+                    <td>0.220913</td>
+                    <td>0.424658</td>
+                    <td>0.146268</td>
+                    <td>0.116794</td>
+                    <td><strong>0.013955</strong></td>
+                    <td>88.05%</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">4</td>
+                    <td>MSE</td>
+                    <td>0.016445</td>
+                    <td>0.031034</td>
+                    <td>0.00786</td>
+                    <td>0.005737</td>
+                    <td><strong>0.000805</strong></td>
+                    <td>85.97%</td>
+                </tr>
+                <tr>
+                    <td>RMSE</td>
+                    <td>0.128223</td>
+                    <td>0.176148</td>
+                    <td>0.088597</td>
+                    <td>0.075713</td>
+                    <td><strong>0.028369</strong></td>
+                    <td>62.53%</td>
+                </tr>
+                <tr>
+                    <td>NMSE</td>
+                    <td>0.28556</td>
+                    <td>0.538926</td>
+                    <td>0.136471</td>
+                    <td>0.099624</td>
+                    <td><strong>0.013983</strong></td>
+                    <td>85.96%</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">5</td>
+                    <td>MSE</td>
+                    <td>0.018037</td>
+                    <td>0.032217</td>
+                    <td>0.00685</td>
+                    <td>0.005018</td>
+                    <td><strong>0.00083</strong></td>
+                    <td>83.48%</td>
+                </tr>
+                <tr>
+                    <td>RMSE</td>
+                    <td>0.134286</td>
+                    <td>0.179481</td>
+                    <td>0.082717</td>
+                    <td>0.070813</td>
+                    <td><strong>0.02879</strong></td>
+                    <td>59.35%</td>
+                </tr>
+                <tr>
+                    <td>NMSE</td>
+                    <td>0.318152</td>
+                    <td>0.568353</td>
+                    <td>0.120816</td>
+                    <td>0.088533</td>
+                    <td><strong>0.01463</strong></td>
+                    <td>83.48%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
