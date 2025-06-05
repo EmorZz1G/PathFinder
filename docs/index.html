@@ -15,7 +15,6 @@
   <meta property="og:image:height" content="630"/>
 
 
-  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
   <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
   <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
@@ -26,7 +25,6 @@
 
 
   <title>PathFinder</title>
-  <link rel="icon" type="image/x-icon" href="static/images/elephant.svg">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
 
@@ -35,33 +33,16 @@
   <link rel="stylesheet" href="static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"> 
   <link rel="stylesheet" href="static/css/index.css">
-
+<!-- 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
   <script defer src="static/js/fontawesome.all.min.js"></script>
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
-</head>
-
-<!-- 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PathFinder</title>
-    <!-- 引入MathJax -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
+  <script src="static/js/index.js"></script> -->
+  <style>
         header {
             background-color: #333;
             color: #fff;
@@ -75,6 +56,13 @@
         }
         h1, h2 {
             color: #333;
+        }
+        h1 {
+            font-size: larger;
+        }
+        h2 {
+            font-weight: bold;
+            font-size: larger;
         }
         table {
             width: 100%;
@@ -140,11 +128,27 @@
         .table th {
             background-color: #f2f2f2;
         }
-    </style>
-</head> -->
 
-<body>
-    <h1>PathFinder</h1>
+    
+        body {
+            margin-top: 5%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+
+<!-- <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathFinder</title> -->
+    
+
+<body class="c">
+    <!-- <h1>PathFinder</h1> -->
     <p>Wellcome to our project of <em>PathFinder: Advancing Path Loss Prediction for Out-of-Distribution
             Multi-Transmitter Environments</em>.</p>
 
@@ -188,8 +192,8 @@
     </div>
 
     <div class="section">
-        <h2>Experiment</h2>
-        <h3>Evaluation Metric</h3>
+        <h2>A. Experiment</h2>
+        <h3>1. Evaluation Metric</h3>
         <p>To evaluate the performance of different methods, we construct a total of six core metrics. The first three
             metrics are global coverage metrics, namely MSE, RMSE, and NMSE. The latter three metrics focus on the
             receiver area and are referred to as MSE-R, RMSE-R, and NMSE-R.</p>
@@ -276,7 +280,7 @@
     </div>
 
     <div class="section">
-        <h2>Comparison on OOD-RPP</h2>
+        <h2>B. Comparison on OOD-RPP</h2>
         <p>Fig. S1 displays the prediction results of all baseline methods alongside our model across different samples.
         </p>
         <div class="figure">
@@ -286,7 +290,7 @@
     </div>
 
     <div class="section">
-        <h2>Coverage Analysis</h2>
+        <h2>C. Coverage Analysis</h2>
         <p>Figs. S2, S3, S4, S5, and S6 visualize the results of different models when the importance of the coverage
             area is 40%, 30%, 20%, 10%, and 5%, respectively.</p>
         <div class="figure">
