@@ -166,8 +166,7 @@
     <p style="margin-bottom: 1em; font-size: x-large; text-align: center; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Wellcome to our project PathFinder.</p>
     
     <p style="text-align: center;">
-        <em>Advancing Path Loss Prediction for Out-of-Distribution
-            Multi-Transmitter Environments</em>.</p>
+        <em>PathFinder: Advancing Path Loss Prediction for Single-to-Multi-Transmitter Scenario</em>.</p>
     </div>
     
     
@@ -192,7 +191,7 @@
 
             <!-- Github link -->
             <span class="link-block">
-                <a href="https://github.com/EmorZz1G/PathFinder.github.io" target="_blank"
+                <a href="https://github.com/EmorZz1G/PathFinder" target="_blank"
                     class="external-link button is-normal is-rounded is-dark" pcked="1">
                     <span class="icon">
                         <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false"
@@ -212,9 +211,9 @@
     <hr>
 
     <div class="section">
-        <h2>0. Comparison on MTOOD-RPP</h2>
+        <h2>A. Comparison on S2MT-RPP</h2>
         <div class="figure">
-            <img src="pics/main_trial3.jpg" alt="Visualization examples of different models in the OOD-RPP task">
+            <img src="pics/main_trial3.jpg" alt="Visualization examples of different models in the DS-RPP task">
             <p>Fig. 7: Visualization of performance of different models when the number of transmitters is 4.</p>
         </div>
         <p>When the number of transmitters reaches four, as shown in Fig. 7, the generalization capabilities of all baseline models have nearly failed, particularly for AE and RadioUNet. PMNet and REM-Net perform relatively better, but even in straightforward building distribution scenarios, they still struggle to predict clear path loss boundaries. In contrast, PathFinder retains a certain clarity in path loss boundaries across various situations, especially when the building distribution is simpler (as in Sample 1), with an MSE of only 0.0006, indicating that the model's predictions closely align with the true targets.
@@ -223,7 +222,7 @@
 
     <div class="section">
         <h2>A. Experiment</h2>
-        <h3>1. Evaluation Metric</h3>
+        <!-- <h3>1. Evaluation Metric</h3>
         <p>To evaluate the performance of different methods, we construct a total of six core metrics. The first three
             metrics are global coverage metrics, namely MSE, RMSE, and NMSE. The latter three metrics focus on the
             receiver area and are referred to as MSE-R, RMSE-R, and NMSE-R.</p>
@@ -307,15 +306,15 @@
         <p>In summary, the first category of global coverage metrics not only requires the model to focus on RPP
             estimation but also evaluates the model's overall fitting capability. In contrast, the second category of
             receiver area extended metrics solely considers the model's RPP ability, making it more task-specific.</p>
-    </div>
+    </div> -->
 
     <div class="section">
-        <h2>B. Comparison on OOD-RPP</h2>
+        <h2>B. Comparison on DS-RPP</h2>
         <p>Fig. S1 displays the prediction results of all baseline methods alongside our model across different samples.
         </p>
         <div class="figure">
-            <img src="pics/main_trial1.jpg" alt="Visualization examples of different models in the OOD-RPP task">
-            <p>Fig. S1: Visualization examples of different models in the OOD-RPP task.</p>
+            <img src="pics/main_trial1.jpg" alt="Visualization examples of different models in the DS-RPP task">
+            <p>Fig. S1: Visualization examples of different models in the DS-RPP task.</p>
         </div>
     </div>
 
@@ -356,11 +355,11 @@
     </div>
 
     <div class="section">
-        <h2>Comparison of OOD Performance</h2>
-        <p>Table S1 shows the comparison of OOD performance of different models when facing varying numbers of
+        <h2>Comparison of Performance under distribution shift.</h2>
+        <p>Table S1 shows the comparison of performance under distribution shift of different models when facing varying numbers of
             transmitters.</p>
         <table class="table">
-            <caption>TABLE S1: Comparison of OOD performance of different models when facing varying numbers of
+            <caption>TABLE S1: Comparison of performance under distribution shift of different models when facing varying numbers of
                 transmitters.</caption>
             <thead>
                 <tr>

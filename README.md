@@ -1,5 +1,3 @@
-This is the offial implementation of <em>PathFinder: Advancing Path Loss Prediction for Out-of-Distribution-Transmitter Environments</em>.
-
-We will refine the project sooner or later.
+This is the offial implementation of <em>PathFinder: Advancing Path Loss Prediction for Single-to-Multi-Transmitter Scenario</em>.
 
 The project site is <a>https://emorzz1g.github.io/PathFinder.github.io/</a>
