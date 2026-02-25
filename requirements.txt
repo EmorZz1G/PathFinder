@@ -1,0 +1,9 @@
+einops
+matplotlib
+numpy
+pandas
+scikit_learn
+timm
+torch
+tqdm
+tensorboardX
