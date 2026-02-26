@@ -1,0 +1,75 @@
+batch_size: &batch_size 30
+save_path: "results/"
+model_path: "models/"
+log_path: "logs_pf/"
+epochs: &epochs 6
+lr: &lr 0.000003
+ssim_loss: 0.
+bias_loss: 0 
+load_pretrain: true
+ckp_name: "checkpoint_sen04.pt"
+device_ids: &device_ids
+  - 0
+  # - 1
+  # - 2
+  # - 3
+
+
+model:
+  name: PathFinder
+  params:
+    # n_channels: 2
+    # n_classes: 1
+  # name: VIT
+  # params:
+  #   n_channels: 3
+  #   n_classes: 1
+  # name: UNet
+  # params:
+  #   n_channels: 2
+  #   n_classes: 1
+
+  # name: RadioUNet
+  # params:
+  #   n_channels: 2
+
+  # name: PMNet
+  # params: 0
+
+  # name: REM_Net
+  # params:
+  #     c: 32
+  #     bn_momentum: 0.1
+
+opti:
+  device_ids: *device_ids
+  num_workers: 9
+  name: AdamW
+  batch_size: *batch_size
+  epochs: *epochs
+  test_epoch: 1
+  valid_step_interval: 2
+  lr: *lr
+  betas: [0.9, 0.95]
+  eps: 1e-08
+  weight_decay: 0
+  amsgrad: False
+
+reproduc:
+  seed: 3407
+  benchmark: false
+  deterministic: true
+
+dataset:
+  dataset_dir: /share/home/202220143416/project/UniAD/REM-NET/data
+  mixup_alpha: 0.7
+  free_prog: false
+  train_idx: 
+    - 0
+    - 500
+  valid_idx:
+    - 500
+    - 600
+  test_idx:
+    - 600
+    - 700 

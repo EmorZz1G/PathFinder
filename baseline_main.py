@@ -31,8 +31,6 @@ args.add_argument('--port', type=int, default=23498)
 
 args = args.parse_args()
 
-# RMSE: 0.025690538182928078
-# Run-time: 57.90728 sec
 
 class Config(dict):
     def __getattr__(self, name):

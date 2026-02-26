@@ -7,3 +7,4 @@ timm
 torch
 tqdm
 tensorboardX
+scikit-image
