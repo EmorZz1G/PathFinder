@@ -31,6 +31,12 @@ Project Structure
 - results/: inference outputs (created at runtime)
 - trainer/: training and inference logic
 
+Pre-trained Model Link
+----
+You can download our pre-trianed models from Google Driver.
+
+https://drive.google.com/drive/folders/1CBaQWyIV5sb2xLmvvwKS_QKQBOZ7ZEov?usp=sharing
+
 Data
 ----
 Set the dataset path in your config file (see `dataset.dataset_dir` in
