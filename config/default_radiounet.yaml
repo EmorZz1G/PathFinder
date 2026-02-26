@@ -52,7 +52,7 @@ reproduc:
   deterministic: true
 
 dataset:
-  dataset_dir: /share/home/202220143416/project/UniAD/REM-NET/data
+  dataset_dir: /public/home/202220143416/datas/PathFinder/data
   train_idx: 
     - 0
     - 500
