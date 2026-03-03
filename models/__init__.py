@@ -5,6 +5,7 @@ from .REM_NET import REM_Net
 from .AE import Autoencoder
 from .PathFinder import PathFinder
 from .PathFinder_wo_low_rank import PathFinder_wo_low_rank
+from .PathFinder_w_std_attn import PathFinder_w_std_attn
 
 def load_model_from_yaml(config):
     model_name = config['model']['name']
@@ -23,6 +24,8 @@ def load_model_from_yaml(config):
         model = PathFinder()
     elif model_name == 'PathFinder_wo_low_rank':
         model = PathFinder_wo_low_rank()
+    elif model_name == 'PathFinder_w_std_attn':
+        model = PathFinder_w_std_attn()
     else:
         raise ValueError(f"Unknown model name: {model_name}")
     return model

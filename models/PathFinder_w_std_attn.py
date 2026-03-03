@@ -150,7 +150,7 @@ class UNetBG(nn.Module):
                                    DoubleConv(prev_dim, c_dims[i]),
                                     DoubleConv(c_dims[i], c_dims[i]),
                                 #    BGAttentionReduce(c_dims[i], tx_dim)
-                                UNET_CrossAttentionBlock(c_dims[i], n_head=4, n_embd=c_dims[i], d_context=n_channels)
+                                UNET_CrossAttentionBlock(c_dims[i], n_head=4, n_embd=c_dims[i]//2, d_context=n_channels)
                                 #    Tx - Buliding
                                 #   tx - Non-Building (20000 * 1)
                                    )
@@ -172,7 +172,7 @@ class UNetBG(nn.Module):
                                       DoubleConv(last_dim+prev_dim, c_dims[i]),
                                       DoubleConv(c_dims[i], c_dims[i]),
                                     #   BGAttentionReduce(c_dims[i], tx_dim)
-                                    UNET_CrossAttentionBlock(c_dims[i], n_head=4, n_embd=c_dims[i], d_context=n_channels)
+                                    UNET_CrossAttentionBlock(c_dims[i], n_head=4, n_embd=c_dims[i]//2, d_context=n_channels)
                                    )
             self.decoders.append(tmp)
             last_dim = c_dims[i]
