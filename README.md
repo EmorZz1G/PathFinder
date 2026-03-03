@@ -6,6 +6,15 @@ This repository contains the official implementation of the paper
 
 Project page: https://emorzz1g.github.io/PathFinder
 
+Dynamic Demonstrations
+--------
+<p align="center">
+<img src="docs/gifs/main_trial1_v1_walk_11.gif" width="32%" />
+<img src="docs/gifs/main_trial1_v1_walk_450.gif" width="32%" />
+<img src="docs/gifs/main_trial1_v1_walk_800.gif" width="32%" />
+<em>Real-time path loss prediction with a walking transmitter across different urban layouts.</em>
+</p>
+
 Highlights
 ----------
 - Multi-GPU training and inference via PyTorch DDP.
