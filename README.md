@@ -2,7 +2,9 @@ PathFinder: Advancing Path Loss Prediction for Single-to-Multi-Transmitter Scena
 =================================================================================
 
 This repository contains the official implementation of the paper
-"PathFinder: Advancing Path Loss Prediction for Single-to-Multi-Transmitter Scenario".
+"PathFinder: Advancing Path Loss Prediction for Single-to-Multi-Transmitter Scenario". 
+
+The paper has been accepted by **Pattern Recognition**.
 
 Project page: https://emorzz1g.github.io/PathFinder
 
@@ -97,6 +99,21 @@ Outputs
 Citation
 --------
 If you use this code, please cite the paper:
+
+```
+@article{zhong2025pathfinder,
+title = {PathFinder: Advancing path loss prediction for single-to-multi-transmitter scenario},
+journal = {Pattern Recognition},
+pages = {113725},
+year = {2026},
+issn = {0031-3203},
+doi = {https://doi.org/10.1016/j.patcog.2026.113725},
+url = {https://www.sciencedirect.com/science/article/pii/S0031320326006904},
+author = {Zhijie Zhong and Zhiwen Yu and Pengyu Li and Jianming Lv and C.L. Philip Chen and Min Chen},
+}
+```
+
+or
 
 ```
 @article{zhong2025pathfinder,
